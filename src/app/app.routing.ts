@@ -10,6 +10,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuardService as AuthGuard } from './common/services/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './common/services/role-guard.service';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,13 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent,
     data: {
       title: 'Login Page'
     }
