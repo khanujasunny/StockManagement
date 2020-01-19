@@ -14,7 +14,8 @@ corporates, companies, institutions and many organisation. This document covers 
 project overview, features, technical and project management approach for the complete
 project.
 
-
+# Live Demo:
+![http://blg.logical-brains.com/](http://blg.logical-brains.com/)
 
 # Specification:
 ## 1. Login
