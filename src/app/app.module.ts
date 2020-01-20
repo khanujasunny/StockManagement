@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -41,6 +41,29 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { BaseComponent } from './authenticated/base/base.component';
+import { ManageEmployeesComponent } from './authenticated/manage-employees/manage-employees.component';
+import { ManageVendorsComponent } from './authenticated/manage-vendors/manage-vendors.component';
+import { ManageCatagoriesComponent } from './authenticated/manage-catagories/manage-catagories.component';
+import { ManageRoleComponent } from './authenticated/manage-role/manage-role.component';
+import { ManageBrandsComponent } from './authenticated/manage-brands/manage-brands.component';
+import { ManageUnitsComponent } from './authenticated/manage-units/manage-units.component';
+import { ManageProductsComponent } from './authenticated/manage-products/manage-products.component';
+import { ProductsOnRentComponent } from './authenticated/products-on-rent/products-on-rent.component';
+import { ManageStoreComponent } from './authenticated/manage-store/manage-store.component';
+import { ManageAuditsComponent } from './authenticated/manage-audits/manage-audits.component';
+import { ReportsComponent } from './authenticated/reports/reports.component';
+import { ManageLocationsComponent } from './authenticated/manage-locations/manage-locations.component';
+import { SettingsComponent } from './authenticated/settings/settings.component';
+import { SupportAndHelpComponent } from './authenticated/support-and-help/support-and-help.component';
+import { AboutSoftwareAndLicenceComponent } from './authenticated/about-software-and-licence/about-software-and-licence.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BlgFormComponent } from './common/blg-form/blg-form.component';
+import { CamelCasePipe } from './common/camel-case.pipe';
+import { EditProfileComponent } from './authenticated/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './authenticated/change-password/change-password.component';
+
 
 @NgModule({
   imports: [
@@ -55,7 +78,9 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -64,11 +89,31 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
     P500Component,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    BaseComponent,
+    ManageEmployeesComponent,
+    ManageVendorsComponent,
+    ManageCatagoriesComponent,
+    ManageRoleComponent,
+    ManageBrandsComponent,
+    ManageUnitsComponent,
+    ManageProductsComponent,
+    ProductsOnRentComponent,
+    ManageStoreComponent,
+    ManageAuditsComponent,
+    ReportsComponent,
+    ManageLocationsComponent,
+    SettingsComponent,
+    SupportAndHelpComponent,
+    AboutSoftwareAndLicenceComponent,
+    BlgFormComponent,
+    CamelCasePipe,
+    EditProfileComponent,
+    ChangePasswordComponent
   ],
   providers: [{
     provide: LocationStrategy,
-    useClass: PathLocationStrategy
+    useClass: HashLocationStrategy
   }],
   bootstrap: [AppComponent]
 })

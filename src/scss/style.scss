@@ -16,3 +16,11 @@ app-forgot-password{
   flex-direction: column;
   min-height: 100vh;
 }
+
+.breadcrumb-menu {
+  margin-left: 0;
+}
+
+a[href*='#/dashboard/aboutSoftwareAndLicence']{
+  font-size: 0.8em;
+}

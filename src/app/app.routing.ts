@@ -11,6 +11,25 @@ import { RegisterComponent } from './views/register/register.component';
 import { AuthGuardService as AuthGuard } from './common/services/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './common/services/role-guard.service';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { BaseComponent } from './authenticated/base/base.component';
+import { ManageEmployeesComponent } from './authenticated/manage-employees/manage-employees.component';
+import { ManageVendorsComponent } from './authenticated/manage-vendors/manage-vendors.component';
+import { ManageCatagoriesComponent } from './authenticated/manage-catagories/manage-catagories.component';
+import { ManageRoleComponent } from './authenticated/manage-role/manage-role.component';
+import { ManageBrandsComponent } from './authenticated/manage-brands/manage-brands.component';
+import { ManageUnitsComponent } from './authenticated/manage-units/manage-units.component';
+import { ManageProductsComponent } from './authenticated/manage-products/manage-products.component';
+import { ProductsOnRentComponent } from './authenticated/products-on-rent/products-on-rent.component';
+import { ManageStoreComponent } from './authenticated/manage-store/manage-store.component';
+import { AboutSoftwareAndLicenceComponent } from './authenticated/about-software-and-licence/about-software-and-licence.component';
+import { SupportAndHelpComponent } from './authenticated/support-and-help/support-and-help.component';
+import { ManageAuditsComponent } from './authenticated/manage-audits/manage-audits.component';
+import { ManageLocationsComponent } from './authenticated/manage-locations/manage-locations.component';
+import { SettingsComponent } from './authenticated/settings/settings.component';
+import { EditProfileComponent } from './authenticated/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './authenticated/change-password/change-password.component';
+import { ReportsComponent } from './authenticated/reports/reports.component';
 
 export const routes: Routes = [
   {
@@ -47,23 +66,44 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
+    path: 'dashboard',
+    component: BaseComponent,
+    children: [
+      {
+        path: 'manageEmployees', component: ManageEmployeesComponent,
+        children: [
+          { path: 'add', component: ManageVendorsComponent }
+        ]
+      },
+      { path: 'manageVendors', component: ManageVendorsComponent },
+      { path: 'manageCatagories', component: ManageCatagoriesComponent },
+      { path: 'manageRole', component: ManageRoleComponent },
+      { path: 'manageBrands', component: ManageBrandsComponent },
+      { path: 'manageUnits', component: ManageUnitsComponent },
+      { path: 'manageProducts', component: ManageProductsComponent },
+      { path: 'productsOnRent', component: ProductsOnRentComponent },
+      { path: 'manageStores', component: ManageStoreComponent },
+      { path: 'manageAudits', component: ManageAuditsComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'manageLocations', component: ManageLocationsComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'supportAndHelp', component: SupportAndHelpComponent },
+      { path: 'aboutSoftwareAndLicence', component: AboutSoftwareAndLicenceComponent },
+      { path: 'editProfile', component: EditProfileComponent },
+      { path: 'changePassword', component: ChangePasswordComponent }
+    ]
   },
   {
     path: '',
     component: DefaultLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
     children: [
       {
         path: 'adminView',
-        canActivate: [RoleGuard],
+        // canActivate: [RoleGuard],
         data: {
           expectedRole: 'admin'
         },
@@ -107,7 +147,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
