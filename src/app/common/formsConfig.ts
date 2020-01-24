@@ -8,12 +8,12 @@ export const formsConfig = {
     description: 'Sign In to your account',
     fields: [
       {
-        name: 'email', type: 'email', placeholder: 'Please enter your email',
-        editable: true, required: true, icon: 'user'
+        name: 'emailAddress', type: 'email', placeholder: 'Please enter your email',
+        required: true, icon: 'user'
       },
       {
         name: 'password', type: 'password', placeholder: '*******',
-        editable: true, required: true, icon: 'lock'
+        required: true, icon: 'lock'
       }
     ],
     actions: {
@@ -32,8 +32,7 @@ export const formsConfig = {
     description: 'Enter your email below to reset your password',
     fields: [
       {
-        name: 'email', type: 'email', placeholder: 'Please enter your email',
-        editable: true, required: true, icon: 'user'
+        name: 'emailAddress', type: 'email', placeholder: 'Please enter your email', required: true, icon: 'user'
       }
     ],
     actions: {
@@ -87,6 +86,27 @@ export const formsConfig = {
         ]
       },
       { name: 'zipCode', type: 'number', placeholder: 'Please enter your zip code', label: 'Zip Code', icon: 'user' }
+    ],
+    actions: {
+      submit: true,
+      reset: true
+    },
+    options: {
+      editable: true
+    }
+  },
+  addCategory: {
+    fields: [
+      { name: 'categoryName', type: 'text', placeholder: 'Please enter category name', label: 'Category Name', icon: 'user' },
+      {
+        name: 'parentCategory', type: 'select', placeholder: 'Main Category', label: 'Parent Category', icon: 'user',
+        options: [
+          { name: 'Some Dummy Category', value: 'india' }
+        ]
+      },
+      { name: 'hsnCode', type: 'email', placeholder: 'Please enter HSN Code', label: 'Email', icon: 'user' },
+      { name: 'gstRate', type: 'number', placeholder: 'Please enter GST (%)', label: 'GST Rate (%)', icon: 'user' },
+      { name: 'description', type: 'textarea', placeholder: 'Please enter description', label: 'Address', icon: 'user' }
     ],
     actions: {
       submit: true,

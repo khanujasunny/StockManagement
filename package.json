@@ -1,21 +1,19 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
+  "name": "blg-stock-management",
   "version": "2.7.2",
-  "description": "CoreUI Free Angular 2+ Admin Template",
+  "description": "BLG Stock Management - Admin Panel",
   "author": {
-    "name": "Łukasz Holeczek",
-    "url": "http://holeczek.pl",
-    "github": "https://github.com/mrholek",
-    "twitter": "https://twitter.com/lukaszholeczek"
+    "name": "BLG",
+    "url": "http://blg.logical-brains.com/"
   },
   "contributors": [
     {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
+      "name": "Sunny Khanuja",
+      "url": "http://blg.logical-brains.com/"
     }
   ],
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2019 creativeLabs Łukasz Holeczek",
+  "homepage": "http://blg.logical-brains.com/",
+  "copyright": "BLG",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -41,6 +39,7 @@
     "@coreui/coreui": "^2.1.16",
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
     "@coreui/icons": "0.3.0",
+    "angular-webstorage-service": "^1.0.2",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.2",
     "core-js": "^2.6.11",

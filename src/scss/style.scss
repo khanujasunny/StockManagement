@@ -24,3 +24,14 @@ app-forgot-password{
 a[href*='#/dashboard/aboutSoftwareAndLicence']{
   font-size: 0.8em;
 }
+
+a{
+  cursor: pointer;
+}
+
+.cPointer{
+  cursor: pointer;
+}
+.hoverShadow:hover{
+  box-shadow: 0.5px 0.5px 3px #000;
+}

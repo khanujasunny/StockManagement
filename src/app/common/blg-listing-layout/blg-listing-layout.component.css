@@ -1,0 +1,7 @@
+.listingTable tr .editIcon{
+  display: none;
+}
+
+.listingTable tr:hover .editIcon{
+  display: inline-block;
+}

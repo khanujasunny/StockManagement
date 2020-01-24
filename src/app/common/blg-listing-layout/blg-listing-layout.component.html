@@ -1,0 +1,66 @@
+<div class="card p-4 col-md-12 col-sm-12">
+  <div class="card-body">
+    <div class="row pb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
+          <input class="form-control" id="input1-group1" name="input1-group1" placeholder="Search" type="text">
+        </div>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn-secondary">Import / Export</button>
+        <button class="btn btn-primary" [routerLink]="['add']"><i class="fa fa-add"></i> Add
+          {{tableData.title}}</button>
+      </div>
+    </div>
+    <table class="table table-bordered listingTable">
+      <thead>
+        <tr>
+          <th *ngFor="let field of tableData.fields" [attr.width]="field.width">{{field.value}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableData.data; let i = index" class='cPointer hoverShadow'
+          [ngClass]="{'bg-primary': tableData.selected[i]}"
+          (click)='tableData.selected[i] = tableData.selected[i] ? false : true;'>
+          <td *ngFor="let field of tableData.fields">
+            <span *ngIf="!field.editable || (field.editable && !row._inEditMode)">{{row[field.key]}}</span>
+            <div *ngIf="field.editable && row._inEditMode" class="input-group" (click)="$event.stopPropagation();">
+              <input autofocus class="form-control" type="text" [value]="row[field.key]">
+              <span class="input-group-append">
+                <button class="btn btn-primary" type="button"><i class="fa fa-check"></i></button>
+                <button class="btn btn-danger" type="button"
+                  (click)="$event.stopPropagation(); row._inEditMode = false;"><i class="fa fa-close"></i></button>
+              </span>
+            </div>
+            <button *ngIf="field.editable && !row._inEditMode" class="btn btn-secondary btn-sm pull-right" type="button"
+              (click)="$event.stopPropagation(); row._inEditMode = true;">
+              <i class="fa fa-edit"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button class="btn btn-danger pull-left" *ngIf='getSelectedLength()'><i class="fa fa-remove"></i> Delete
+        Selected</button>
+      <ul class="pagination pull-right">
+        <li class="page-item" [ngClass]="{'disabled': tableData.currentPage == 0}"
+          (click)=' tableData.currentPage == 0 ? null: tableData.currentPage = 0;'><a class="page-link">First</a></li>
+        <li class="page-item" [ngClass]="{'disabled': tableData.currentPage == 0}"
+          (click)='tableData.currentPage > 0 ? tableData.currentPage = tableData.currentPage-1 : null ;'><a
+            class="page-link">Prev</a>
+        </li>
+        <li class="page-item {{index}}" [ngClass]="{'active': index === tableData.currentPage}"
+          *ngFor="let pageNo of arrayFill(tableData.totalPages); let index = index;">
+          <a class="page-link" (click)='tableData.currentPage = index;'>{{index+1}}</a>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': tableData.currentPage == tableData.totalPages-1}"
+          (click)='tableData.currentPage == tableData.totalPages-1 ? null : tableData.currentPage = tableData.currentPage+1;'>
+          <a class="page-link">Next</a></li>
+        <li class="page-item" [ngClass]="{'disabled': tableData.currentPage == tableData.totalPages-1}"
+          (click)='tableData.currentPage == tableData.totalPages-1 ? null : tableData.currentPage = tableData.totalPages-1;'>
+          <a class="page-link">Last</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

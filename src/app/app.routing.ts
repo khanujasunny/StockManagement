@@ -4,13 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
+import { P404Component } from './public/error/404.component';
+import { P500Component } from './public/error/500.component';
+import { LoginComponent } from './public/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuardService as AuthGuard } from './common/services/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './common/services/role-guard.service';
-import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './public/forgot-password/forgot-password.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { BaseComponent } from './authenticated/base/base.component';
 import { ManageEmployeesComponent } from './authenticated/manage-employees/manage-employees.component';
@@ -30,6 +30,10 @@ import { SettingsComponent } from './authenticated/settings/settings.component';
 import { EditProfileComponent } from './authenticated/edit-profile/edit-profile.component';
 import { ChangePasswordComponent } from './authenticated/change-password/change-password.component';
 import { ReportsComponent } from './authenticated/reports/reports.component';
+import { ManageCountryComponent } from './authenticated/manage-locations/manage-country/manage-country.component';
+import { ManageCityComponent } from './authenticated/manage-locations/manage-city/manage-city.component';
+import { ManageStateComponent } from './authenticated/manage-locations/manage-state/manage-state.component';
+import { AddCatagoryComponent } from './authenticated/manage-catagories/add-catagory/add-catagory.component';
 
 export const routes: Routes = [
   {
@@ -76,7 +80,12 @@ export const routes: Routes = [
         ]
       },
       { path: 'manageVendors', component: ManageVendorsComponent },
-      { path: 'manageCatagories', component: ManageCatagoriesComponent },
+      {
+        path: 'manageCatagories', component: ManageCatagoriesComponent
+      },
+      {
+        path: 'manageCatagories/add', component: AddCatagoryComponent
+      },
       { path: 'manageRole', component: ManageRoleComponent },
       { path: 'manageBrands', component: ManageBrandsComponent },
       { path: 'manageUnits', component: ManageUnitsComponent },
@@ -85,7 +94,14 @@ export const routes: Routes = [
       { path: 'manageStores', component: ManageStoreComponent },
       { path: 'manageAudits', component: ManageAuditsComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'manageLocations', component: ManageLocationsComponent },
+      {
+        path: 'manageLocations', component: ManageLocationsComponent,
+        children: [
+          { path: 'country', component: ManageCountryComponent },
+          { path: 'country/state', component: ManageStateComponent },
+          { path: 'country/state/city', component: ManageCityComponent },
+        ]
+      },
       { path: 'settings', component: SettingsComponent },
       { path: 'supportAndHelp', component: SupportAndHelpComponent },
       { path: 'aboutSoftwareAndLicence', component: AboutSoftwareAndLicenceComponent },

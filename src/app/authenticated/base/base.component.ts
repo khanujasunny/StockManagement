@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from './_blgNav';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { BlgService } from '../blg-service';
 
 
 @Component({
@@ -13,8 +14,19 @@ export class BaseComponent implements OnInit {
   public navItems = navItems;
 
   breadcrumbs: string[];
+  userInfo: any;
 
-  constructor(private activeRouter: ActivatedRoute, private router: Router) {
+  constructor(private activeRouter: ActivatedRoute, private router: Router, private service: BlgService) {
+
+    this.userInfo = service.getFromLocal('LOGIN_INFO');
+
+    // this.userInfo = { user: { firstName: 'Sunny', lastName: 'Khanuja' } };
+
+    if (!this.userInfo) {
+      this.router.navigate(['/login']);
+    }
+
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.breadcrumbs = (event.url.split('/'));
@@ -27,8 +39,15 @@ export class BaseComponent implements OnInit {
     console.info('init');
   }
 
+
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+
+  logoutUser() {
+    if (this.service.saveInLocal('LOGIN_INFO', null)) {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

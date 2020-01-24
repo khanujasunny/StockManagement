@@ -11,7 +11,7 @@
         dropdownToggle (click)="false">
         <img src="assets/img/avatars/7.jpg" class="img-avatar pull-left mt-1" alt="admin@sunny.com" />
         <div class="pull-left pt-1 pb-1 pr-2">
-          <div class="font-weight-bold">Rajesh Saran</div>
+          <div class="font-weight-bold">{{userInfo.user.firstName}} {{userInfo.user.lastName}}</div>
           <span class="text-muted">Super Admin</span>
         </div>
       </a>
@@ -29,15 +29,7 @@
             class="badge badge-danger">42</span></a>
         <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span
             class="badge badge-warning">42</span></a>
-        <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span
-            class="badge badge-primary">42</span></a>
-        <div class="divider"></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" (click)='logoutUser()'><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
   </ul>
@@ -78,7 +70,7 @@
     <!--</ol>-->
     <div class="container-fluid">
       <div *ngIf="breadcrumbs.length === 1">
-        <h2>Welcome Rajesh Saran</h2>
+        <h2>Welcome {{userInfo.user.firstName}} {{userInfo.user.lastName}}</h2>
         <h4>Please select a menu item to perform a action</h4>
       </div>
       <router-outlet></router-outlet>

@@ -68,7 +68,24 @@ export const navItems: INavData[] = [
   {
     name: 'Manage Locations',
     url: '/dashboard/manageLocations',
-    icon: 'icon-location-pin'
+    icon: 'icon-location-pin',
+    children: [
+      {
+        name: 'Manage Country',
+        url: '/dashboard/manageLocations/country',
+        icon: 'icon-location-pin'
+      },
+      {
+        name: 'Manage State',
+        url: '/dashboard/manageLocations/country/state',
+        icon: 'icon-location-pin'
+      },
+      {
+        name: 'Manage City',
+        url: '/dashboard/manageLocations/country/state/city',
+        icon: 'icon-location-pin'
+      }
+    ]
   },
   {
     name: 'Settings',

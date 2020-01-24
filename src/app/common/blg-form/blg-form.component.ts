@@ -24,6 +24,8 @@ export class BlgFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
 
   formModal: any;
+  formData: any = {};
+
   constructor() { }
 
   ngOnInit() {
@@ -33,11 +35,11 @@ export class BlgFormComponent implements OnInit {
   }
 
   onFrmSubmit() {
-    this.onSubmit.emit({ success: true });
+    this.onSubmit.emit({ success: true, data: this.formData });
     console.log('on submit');
   }
 
-  isInputType(type) {
+  isInputType(type: string) {
     return (type !== 'textarea' && type !== 'select');
   }
 }
