@@ -62,19 +62,19 @@ export const formsConfig = {
   },
   editProfile: {
     fields: [
-      { name: 'firstName', type: 'text', placeholder: 'Please enter your first name', label: 'First Name', icon: 'user' },
-      { name: 'lastName', type: 'text', placeholder: 'Please enter your last name', label: 'Last Name', icon: 'user' },
-      { name: 'email', type: 'email', placeholder: 'Please enter your email', label: 'Email', icon: 'user' },
-      { name: 'mobileNo', type: 'number', placeholder: 'Please enter your mobile/phone number.', label: 'Mobile Number.', icon: 'user' },
-      { name: 'address', type: 'textarea', placeholder: 'Please enter your address', label: 'Address', icon: 'user' },
+      { name: 'firstName', type: 'text', placeholder: 'Please enter your first name', label: 'First Name', icon: 'pencil', required: true },
+      { name: 'lastName', type: 'text', placeholder: 'Please enter your last name', label: 'Last Name', icon: 'pencil', required: true },
+      { name: 'email', type: 'email', placeholder: 'Please enter your email', label: 'Email', icon: 'pencil', required: true },
+      { name: 'mobileNo', type: 'number', placeholder: 'Please enter your mobile/phone number.', label: 'Mobile Number.', icon: 'pencil', required: true },
+      { name: 'address', type: 'textarea', placeholder: 'Please enter your address', label: 'Address', icon: 'pencil', required: true },
       {
-        name: 'country', type: 'select', placeholder: 'Select Country', label: 'Country', icon: 'user',
+        name: 'country', type: 'select', placeholder: 'Select Country', label: 'Country', icon: 'pencil',
         options: [
           { name: 'India', value: 'india' }
         ]
       },
       {
-        name: 'state', type: 'select', placeholder: 'Select State', label: 'State', icon: 'user',
+        name: 'state', type: 'select', placeholder: 'Select State', label: 'State', icon: 'pencil',
         options: [
           { name: 'Karnataka', value: 'kar' }
         ]

@@ -69,7 +69,7 @@
     <!--</li>-->
     <!--</ol>-->
     <div class="container-fluid">
-      <div *ngIf="breadcrumbs.length === 1">
+      <div *ngIf="breadcrumbs?.length === 1">
         <h2>Welcome {{userInfo.user.firstName}} {{userInfo.user.lastName}}</h2>
         <h4>Please select a menu item to perform a action</h4>
       </div>

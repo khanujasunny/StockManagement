@@ -17,16 +17,6 @@ export class BaseComponent implements OnInit {
   userInfo: any;
 
   constructor(private activeRouter: ActivatedRoute, private router: Router, private service: BlgService) {
-
-    this.userInfo = service.getFromLocal('LOGIN_INFO');
-
-    // this.userInfo = { user: { firstName: 'Sunny', lastName: 'Khanuja' } };
-
-    if (!this.userInfo) {
-      this.router.navigate(['/login']);
-    }
-
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.breadcrumbs = (event.url.split('/'));
@@ -36,7 +26,16 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     console.info('init');
+    this.userInfo = this.service.getFromLocal('LOGIN_INFO');
+
+    this.userInfo = { user: { firstName: 'Sunny', lastName: 'Khanuja' } };
+
+    if (!this.userInfo) {
+      this.router.navigate(['/login']);
+    }
   }
 
 

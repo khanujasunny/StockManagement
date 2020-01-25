@@ -33,6 +33,9 @@ import {
   AppSidebarModule,
 } from '@coreui/angular';
 
+
+import './common/util-enter-as-tab';
+
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 
@@ -75,6 +78,7 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 import { BlgListingLayoutComponent } from './common/blg-listing-layout/blg-listing-layout.component';
 import { AddCatagoryComponent } from './authenticated/manage-catagories/add-catagory/add-catagory.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import * as $ from "jquery";
 
 @NgModule({
   imports: [
