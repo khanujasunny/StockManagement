@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { PublicService } from './public/public.service';
+import {globalConfig} from './common/utils/utils';
 
 @Component({
   // tslint:disable-next-line
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
     service.validateLicenseKey().subscribe((data: any) => {
       if (data.status === 200) {
         // check expiry data for multiple scenario's
-
+        globalConfig.settings = data.data;
         const today = new Date();
         if(this.getDateDiff(today, new Date(data.data.licenseExpieryDate)) < 1){
           this.licenseStatus = 'EXPIRED';

@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PublicService } from '../public.service';
+import {globalConfig} from '../../common/utils/utils';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
+  globalConfig = globalConfig;
   errorMessage: string;
   constructor(private router: Router, private service: PublicService) {
     // if user is authenticated, redirect to Dashboard

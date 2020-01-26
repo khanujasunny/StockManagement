@@ -9,6 +9,8 @@ import { listConfig } from './blgListConfig';
 export class BlgListingLayoutComponent implements OnInit {
 
   @Input() tableName: any;
+  @Input() defaultData: any;
+
   tableData: any;
   constructor() {
 
@@ -17,6 +19,11 @@ export class BlgListingLayoutComponent implements OnInit {
   ngOnInit() {
     if (this.tableName && listConfig[this.tableName]) {
       this.tableData = listConfig[this.tableName];
+    }
+
+    if (this.defaultData) {
+      console.info(this.defaultData);
+      this.tableData.data = this.defaultData;
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BlgService } from '../blg-service';
 
 @Component({
   selector: 'app-manage-catagories',
@@ -7,8 +8,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./manage-catagories.component.css']
 })
 export class ManageCatagoriesComponent implements OnInit {
+  categories: any;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private service: BlgService) {
+
+    service.userInfo.subscribe(data => {
+      service.catagoriesGetList().subscribe((data: any) => {
+        if (data.status == 200) {
+          this.categories = data.data;
+        }
+      });
+    })
+
+
   }
 
   ngOnInit() {

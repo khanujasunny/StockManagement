@@ -1,14 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
-
-
+import {globalConfig} from '../common/utils/utils';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'X-API-Key': 'c0fa1bc00531bd78ef38c628449c5102aeabd49b5dc3a2a516ea6ea959d6658e' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'X-API-Key': globalConfig.xApiKey })
 };
 
-const baseUrl = 'http://18.191.163.138:3000/v1/';
+const baseUrl = globalConfig.baseUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +24,11 @@ export class PublicService {
   }
 
   authenticateUser(postData) {
-    return this.http.post(`${baseUrl}login`, postData);
+    return this.http.post(`${baseUrl}login`, postData, httpOptions);
   }
 
   forgetPassword(postData) {
-    return this.http.post(`${baseUrl}password/forgot`, postData);
+    return this.http.post(`${baseUrl}password/forgot`, postData, httpOptions);
   }
 
 

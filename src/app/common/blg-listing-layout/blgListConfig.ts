@@ -3,9 +3,14 @@
 export const listConfig = {
   catagories: {
     title: 'Catagories',
-    fields: [{ key: 'slNo', value: '#', editable: false, width: 30 }, { key: 'category', value: 'Category', editable: true }],
-    totalPages: 10,
-    currentPage: 2,
+    fields: [
+      { key: 'name', value: 'Category Name', editable: true },
+      { key: 'HSNCode', value: 'HSN Code', editable: true },
+      { key: 'GSTRate', value: 'GST Rate(%)', editable: true },
+      { key: 'description', value: 'Description', editable: true }
+    ],
+    totalPages: 3,
+    currentPage: 0,
     options: {
       canSearch: true,
       importExport: true,

@@ -1,26 +1,44 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
+import { globalConfig } from '../common/utils/utils';
+import { BehaviorSubject } from 'rxjs';
 
 
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+let httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-API-Key': globalConfig.xApiKey
+  })
 };
 
-const baseUrl = 'http://18.191.163.138:3000/v1/';
+const baseUrl = globalConfig.baseUrl;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlgService {
+  userInfo = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
+  constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+    httpOptions.headers.append('aaaa', 'ssss');
+    this.userInfo.subscribe(info => {
+      if (info) {
+        httpOptions.headers = httpOptions.headers.append('Authorization', info['authtoken']);
+      }
+    });
+  }
 
+
+
+  catagoriesGetList() {
+    return this.http.get(`${baseUrl}categories`, httpOptions);
+  }
 
 
   saveInLocal(key, val): boolean {
-    console.log('recieved= key:' + key + 'value:' + val);
     if (!val) {
       this.storage.remove(key);
     } else {
@@ -31,7 +49,6 @@ export class BlgService {
 
 
   getFromLocal(key): any {
-    console.log('recieved= key:' + key);
     return this.storage.get(key);
   }
 
