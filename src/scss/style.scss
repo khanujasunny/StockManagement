@@ -35,3 +35,29 @@ a{
 .hoverShadow:hover{
   box-shadow: 0.5px 0.5px 3px #000;
 }
+
+.globalMessage{
+        display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: 3em;
+    color: #383838;
+}
+
+.footerInfo{
+  position: fixed;
+    bottom: 0px;
+    left: 0px;
+        color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    width: 100%;
+    z-index: 9999;
+    font-size: 2em;
+    text-align: center;
+}

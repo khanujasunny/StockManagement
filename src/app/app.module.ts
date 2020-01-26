@@ -34,7 +34,7 @@ import {
 } from '@coreui/angular';
 
 
-import './common/util-enter-as-tab';
+import './common/utils/util-enter-as-tab';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';

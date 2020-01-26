@@ -1,0 +1,20 @@
+<app-gui-loader></app-gui-loader>
+
+
+<ng-container [ngSwitch]="licenseStatus">
+  <!-- the same view can be shown in more than one case -->
+  <div *ngSwitchCase="'EXPIRED'"  class="globalMessage text-danger">
+  <i class="fa fa-info-remove"></i> &nbsp;&nbsp;Invalid License Key, please contact Admin!
+  </div>
+  <ng-container *ngSwitchCase="'VALID'">
+    <router-outlet></router-outlet>
+  </ng-container>
+  <ng-container *ngSwitchCase="'INVALIDATE_IN_30'">
+    <div class="footerInfo" *ngIf='!hideFooterInfo'>
+        Your subscription expire soon, please contact to admin. &nbsp;&nbsp;<a  (click)="hideFooterInfo = true;"><i class="fa fa-remove"></i></a>
+    </div>
+    <router-outlet></router-outlet>
+  </ng-container>
+  <!--default case when there are no matches -->
+  <div *ngSwitchDefault class="globalMessage text-muted"><i class="fa fa-spinner"></i> &nbsp;&nbsp;{{licenseStatus ? licenseStatus : 'Checking'}} License Status...</div>
+</ng-container>

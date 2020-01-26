@@ -1,13 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { PublicService } from './public/public.service';
 
 @Component({
   // tslint:disable-next-line
   selector: 'body',
-  template: '<app-gui-loader></app-gui-loader><router-outlet></router-outlet>'
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+
+  licenseStatus = null; // 'EXPIRED',  'VALID',  'INVALIDATE_IN_30', 'CHECKING' , 'EXCEPTION';
+  constructor(private router: Router, private service: PublicService) {
+    // check for license key
+
+    service.validateLicenseKey().subscribe((data: any) => {
+      if (data.status === 200) {
+        // check expiry data for multiple scenario's
+
+        const today = new Date();
+        if(this.getDateDiff(today, new Date(data.data.licenseExpieryDate)) < 1){
+          this.licenseStatus = 'EXPIRED';
+        } else if(this.getDateDiff(today, new Date(data.data.licenseExpieryDate)) > 30){
+          this.licenseStatus = 'VALID'
+        } else if(this.getDateDiff(today, new Date(data.data.licenseExpieryDate)) < 30){
+          this.licenseStatus = 'INVALIDATE_IN_30'
+        }
+      }
+    });
+
+  }
+
+  getDateDiff(toDate: any ,fromDate: any){
+    // const today = new Date('2021-12-16T19:10:16.617Z');
+    const diffTime = fromDate - toDate;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    return diffDays;
+  }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
