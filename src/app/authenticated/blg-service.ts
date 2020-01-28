@@ -20,6 +20,9 @@ const baseUrl = globalConfig.baseUrl;
   providedIn: 'root'
 })
 export class BlgService {
+
+
+
   userInfo = new BehaviorSubject(null);
 
   constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
@@ -32,6 +35,16 @@ export class BlgService {
   }
 
 
+  deleteAPI(APIurl: any) {
+    return this.http.delete(`${baseUrl}${APIurl}`, httpOptions);
+  }
+  getAPI(APIurl: any) {
+    return this.http.get(`${baseUrl}${APIurl}`, httpOptions);
+  }
+
+  postAPI(APIurl: any, data: any) {
+    return this.http.post(`${baseUrl}${APIurl}`, data, httpOptions);
+  }
 
   catagoriesGetList() {
     return this.http.get(`${baseUrl}categories`, httpOptions);

@@ -78,7 +78,11 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 import { BlgListingLayoutComponent } from './common/blg-listing-layout/blg-listing-layout.component';
 import { AddCatagoryComponent } from './authenticated/manage-catagories/add-catagory/add-catagory.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap';
 import * as $ from "jquery";
+
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   imports: [
@@ -99,7 +103,9 @@ import * as $ from "jquery";
     HttpClientModule,
     StorageServiceModule,
     ProgressbarModule.forRoot(),
-    ModalModule
+    ModalModule,
+    TooltipModule.forRoot(),
+    ToastrModule.forRoot() // ToastrModule added
   ],
   declarations: [
     AppComponent,

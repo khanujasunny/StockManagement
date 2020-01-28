@@ -2,12 +2,21 @@
 
 export const listConfig = {
   catagories: {
-    title: 'Catagories',
+    title: 'Category List',
+    addText: 'Add Category',
     fields: [
+      { key: '_autoincrement', value: 'S.NO', width: 70 },
       { key: 'name', value: 'Category Name', editable: true },
       { key: 'HSNCode', value: 'HSN Code', editable: true },
       { key: 'GSTRate', value: 'GST Rate(%)', editable: true },
-      { key: 'description', value: 'Description', editable: true }
+      { key: 'description', value: 'Description', editable: true },
+      {
+        key: '_actions', value: 'Actions', actions: [
+          { key: 'delete', icon: 'trash', color: 'danger', tooltip: 'Delete', deleteAPI: 'categories/{id}' },
+          { key: 'edit', icon: 'edit', color: 'primary', tooltip: 'Edit' }
+        ], width: 150
+      },
+
     ],
     totalPages: 3,
     currentPage: 0,
@@ -18,15 +27,8 @@ export const listConfig = {
       canEdit: true,
       canDelete: true
     },
-    data: [
-      { slNo: 1, category: 'Electronic' },
-      { slNo: 2, category: 'Stationary' },
-      { slNo: 3, category: 'Clinic' },
-      { slNo: 4, category: 'Grocery' },
-      { slNo: 5, category: 'Medical' },
-      { slNo: 6, category: 'Supplements' },
-      { slNo: 7, category: 'Antique' }
-    ],
-    selected: {}
+    data: [],
+    selected: {},
+    apis: { getAPI: 'categories', deleteAPI: 'categories/{id}' }
   }
 }

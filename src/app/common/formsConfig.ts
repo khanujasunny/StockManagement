@@ -44,13 +44,24 @@ export const formsConfig = {
     },
     options: {
       editable: true
-    }
+    },
+    submitAPI: 'password/forgot'
   },
   changePassword: {
+    title: 'Change Password',
     fields: [
-      { name: 'oldPassword', type: 'password', placeholder: 'Please enter your old password', label: 'Old Password', icon: 'lock' },
-      { name: 'newPassword', type: 'password', placeholder: 'Please enter new password', label: 'New Password', icon: 'lock' },
-      { name: 'confirmPassword', type: 'password', placeholder: 'Please confirm password', label: 'Confirm Password', icon: 'lock' }
+      {
+        name: 'oldPassword', type: 'password', placeholder: 'Please enter your old password',
+        label: 'Old Password', icon: 'lock', required: true
+      },
+      {
+        name: 'newPassword', type: 'password', placeholder: 'Please enter new password',
+        label: 'New Password', icon: 'lock', required: true
+      },
+      {
+        name: 'confirmPassword', type: 'password', placeholder: 'Please confirm password',
+        label: 'Confirm Password', icon: 'lock', required: true
+      }
     ],
     actions: {
       submit: true,
@@ -61,11 +72,15 @@ export const formsConfig = {
     }
   },
   editProfile: {
+    title: 'Edit Profile',
     fields: [
       { name: 'firstName', type: 'text', placeholder: 'Please enter your first name', label: 'First Name', icon: 'pencil', required: true },
       { name: 'lastName', type: 'text', placeholder: 'Please enter your last name', label: 'Last Name', icon: 'pencil', required: true },
       { name: 'email', type: 'email', placeholder: 'Please enter your email', label: 'Email', icon: 'pencil', required: true },
-      { name: 'mobileNo', type: 'number', placeholder: 'Please enter your mobile/phone number.', label: 'Mobile Number.', icon: 'pencil', required: true },
+      {
+        name: 'mobileNo', type: 'number', placeholder: 'Please enter your mobile/phone number.',
+        label: 'Mobile Number.', icon: 'pencil', required: true
+      },
       { name: 'address', type: 'textarea', placeholder: 'Please enter your address', label: 'Address', icon: 'pencil', required: true },
       {
         name: 'country', type: 'select', placeholder: 'Select Country', label: 'Country', icon: 'pencil',
@@ -96,17 +111,12 @@ export const formsConfig = {
     }
   },
   addCategory: {
+    title: 'Add Category',
     fields: [
-      { name: 'categoryName', type: 'text', placeholder: 'Please enter category name', label: 'Category Name', icon: 'user' },
-      {
-        name: 'parentCategory', type: 'select', placeholder: 'Main Category', label: 'Parent Category', icon: 'user',
-        options: [
-          { name: 'Some Dummy Category', value: 'india' }
-        ]
-      },
-      { name: 'hsnCode', type: 'email', placeholder: 'Please enter HSN Code', label: 'Email', icon: 'user' },
-      { name: 'gstRate', type: 'number', placeholder: 'Please enter GST (%)', label: 'GST Rate (%)', icon: 'user' },
-      { name: 'description', type: 'textarea', placeholder: 'Please enter description', label: 'Address', icon: 'user' }
+      { name: 'name', type: 'text', placeholder: 'Please enter category name', label: 'Category Name', required: true },
+      { name: 'HSNCode', type: 'text', placeholder: 'Please enter HSN Code', label: 'HSN Code', required: true },
+      { name: 'GSTRate', type: 'number', placeholder: 'Please enter GST (%)', label: 'GST Rate (%)', required: true },
+      { name: 'description', type: 'textarea', placeholder: 'Please enter description', label: 'Description', required: true }
     ],
     actions: {
       submit: true,
@@ -114,6 +124,7 @@ export const formsConfig = {
     },
     options: {
       editable: true
-    }
+    },
+    submitAPI: 'categories'
   }
 };

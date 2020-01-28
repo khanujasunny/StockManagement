@@ -5,3 +5,11 @@
 .listingTable tr:hover .editIcon{
   display: inline-block;
 }
+
+
+
+.table td {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  vertical-align: middle;
+}

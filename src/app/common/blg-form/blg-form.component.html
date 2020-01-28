@@ -1,47 +1,60 @@
 <div *ngIf="!formModal">
   No Form Config Found!
 </div>
+<div class="card">
+  <div class="card-header">
+    <strong>{{formModal.title}}</strong>
+    <div class="card-header-actions">
+      <span class="text-danger">* Mandatory Information</span>
+    </div>
+  </div>
+  <div class=" card-body">
 
-<form *ngIf="formModal" #f="ngForm" (ngSubmit)="onFrmSubmit()" ngNativeValidate>
-  <h1>{{formModal.title}}</h1>
-  <p class="text-muted">{{formModal.description}}</p>
-  <ng-content></ng-content>
-  <div class="form-group row mb-3" *ngFor="let field of formModal.fields;">
-    <label class="col-md-3 col-form-label" *ngIf='field.label'>{{field.label}}</label>
-    <div [ngClass]="{'col-md-9': field.label, 'col-md-12': !field.label}">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i [class]="'icon-'+field.icon"></i></span>
+
+    <form *ngIf="formModal" #f="ngForm" (ngSubmit)="onFrmSubmit()" ngNativeValidate>
+      <p class="text-muted">{{formModal.description}}</p>
+      <ng-content></ng-content>
+      <div class="form-group row mb-3" *ngFor="let field of formModal.fields;">
+        <label class="col-md-3 col-form-label" *ngIf='field.label'>{{field.label}} <ng-container *ngIf="field.required">
+            *
+          </ng-container></label>
+        <div [ngClass]="{'col-md-9': field.label, 'col-md-12': !field.label}">
+          <div class="input-group">
+            <div class="input-group-prepend" *ngIf="field.icon">
+              <span class="input-group-text"><i [class]="'icon-'+field.icon"></i></span>
+            </div>
+            <input *ngIf='isInputType(field.type)' [type]="field.type" class="form-control"
+              [placeholder]='field.placeholder' [autocomplete]="field.name" [name]="field.name"
+              [required]='field.required' [(ngModel)]="formData[field.name]" />
+
+            <textarea *ngIf="field.type == 'textarea'" class="form-control" [placeholder]='field.placeholder'
+              [name]="field.name" [required]='field.required' [(ngModel)]="formData[field.name]"></textarea>
+            <select *ngIf="field.type == 'select'" class="form-control" [name]="field.name" [required]='field.required'
+              [(ngModel)]="formData[field.name]">
+              <option *ngFor="let option of field.options;" [value]="option.value">{{option.name}}</option>
+            </select>
+
+
+          </div>
         </div>
-        <input *ngIf='isInputType(field.type)' [type]="field.type" class="form-control"
-          [placeholder]='field.placeholder' [autocomplete]="field.name" [name]="field.name" [required]='field.required'
-          [(ngModel)]="formData[field.name]" />
-
-        <textarea *ngIf="field.type == 'textarea'" class="form-control" [placeholder]='field.placeholder'
-          [name]="field.name" [required]='field.required' [(ngModel)]="formData[field.name]"></textarea>
-        <select *ngIf="field.type == 'select'" class="form-control" [name]="field.name" [required]='field.required'
-          [(ngModel)]="formData[field.name]">
-          <option [ngValue]="null">{{field.placeholder}}</option>
-          <option *ngFor="let option of field.options;" [value]="option.value">{{option.name}}</option>
-        </select>
-
-
       </div>
-    </div>
-  </div>
 
-  <div class="row" *ngIf="formModal.actions">
-    <div class="col-md-6 col-sm-12" *ngIf="formModal.actions.submit">
-      <button type="submit"
-        class="btn btn-primary px-4 btn-block">{{formModal.actions.submit.label ? formModal.actions.submit.label : 'Submit'}}</button>
-    </div>
-    <div class="col-md-6 col-sm-12" *ngIf="formModal.actions.reset">
-      <button type="button"
-        class="btn btn-secondary px-4 btn-block">{{formModal.actions.reset.label ? formModal.actions.reset.label: 'Reset'}}</button>
-    </div>
-    <div class="col-md-6 col-sm-12" *ngFor="let button of formModal.actions.others;">
-      <button type="button" class="btn btn-{{button.type}} px-4 btn-block"
-        [routerLink]="button.routerLink">{{button.label}}</button>
-    </div>
+      <div class="row" *ngIf="formModal.actions">
+        <div class="col-md-6 col-sm-12" *ngIf="formModal.actions.submit">
+          <button type="submit"
+            class="btn btn-primary px-4 btn-block">{{formModal.actions.submit.label ? formModal.actions.submit.label : 'Submit'}}</button>
+        </div>
+        <div class="col-md-6 col-sm-12" *ngIf="formModal.actions.reset">
+          <button type="button" class="btn btn-secondary px-4 btn-block"
+            (click)='resetForm()'>{{formModal.actions.reset.label ? formModal.actions.reset.label: 'Reset'}}</button>
+        </div>
+        <div class="col-md-6 col-sm-12" *ngFor="let button of formModal.actions.others;">
+          <button type="button" class="btn btn-{{button.type}} px-4 btn-block"
+            [routerLink]="button.routerLink">{{button.label}}</button>
+        </div>
+      </div>
+    </form>
+
+
   </div>
-</form>
+</div>

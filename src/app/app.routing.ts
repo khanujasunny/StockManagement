@@ -81,10 +81,10 @@ export const routes: Routes = [
       },
       { path: 'manageVendors', component: ManageVendorsComponent },
       {
-        path: 'manageCatagories', component: ManageCatagoriesComponent
+        path: 'manageCategory', component: ManageCatagoriesComponent
       },
       {
-        path: 'manageCatagories/add', component: AddCatagoryComponent
+        path: 'manageCategory/add', component: AddCatagoryComponent
       },
       { path: 'manageRole', component: ManageRoleComponent },
       { path: 'manageBrands', component: ManageBrandsComponent },

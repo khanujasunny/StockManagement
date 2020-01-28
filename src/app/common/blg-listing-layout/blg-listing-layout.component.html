@@ -1,6 +1,7 @@
-<div class="card p-4 col-md-12 col-sm-12">
+<div class="card p-4 col-md-12 col-sm-12" *ngIf='tableData.data?.length'>
   <div class="card-body">
     <div class="row pb-3">
+      <h1 class="col-md-12 pb-3">{{tableData.title}}</h1>
       <div class="col-md-6">
         <div class="input-group">
           <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
@@ -8,9 +9,9 @@
         </div>
       </div>
       <div class="col-md-6 text-right">
-        <button class="btn btn-secondary">Import / Export</button>
-        <button class="btn btn-primary" [routerLink]="['add']"><i class="fa fa-add"></i> Add
-          {{tableData.title}}</button>
+        <button class="btn btn-secondary">Import</button>
+        <button class="btn btn-secondary">Export</button>
+        <button class="btn btn-primary" [routerLink]="['add']"><i class="fa fa-add"></i> {{tableData.addText}}</button>
       </div>
     </div>
     <table class="table table-bordered listingTable">
@@ -20,22 +21,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of tableData.data; let i = index" class='cPointer hoverShadow'
-          [ngClass]="{'bg-primary': tableData.selected[i]}"
-          (click)='tableData.selected[i] = tableData.selected[i] ? false : true;'>
+        <tr *ngFor="let row of tableData.data; let rowIndex = index" class='cPointer hoverShadow'
+          [ngClass]="{'bg-primary': tableData.selected[rowIndex]}"
+          (click)='tableData.selected[rowIndex] = tableData.selected[rowIndex] ? false : true;'>
           <td *ngFor="let field of tableData.fields">
-            <span *ngIf="!field.editable || (field.editable && !row._inEditMode)">{{row[field.key]}}</span>
-            <div *ngIf="field.editable && row._inEditMode" class="input-group" (click)="$event.stopPropagation();">
-              <input autofocus class="form-control" type="text" [value]="row[field.key]">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button"><i class="fa fa-check"></i></button>
-                <button class="btn btn-danger" type="button"
-                  (click)="$event.stopPropagation(); row._inEditMode = false;"><i class="fa fa-close"></i></button>
-              </span>
-            </div>
-            <button *ngIf="field.editable && !row._inEditMode" class="btn btn-secondary btn-sm pull-right" type="button"
-              (click)="$event.stopPropagation(); row._inEditMode = true;">
-              <i class="fa fa-edit"></i></button>
+            <span *ngIf="field.key === '_autoincrement'">{{rowIndex+1}}</span>
+            <span *ngIf="field.key !== '_autoincrement' && field.key !== '_actions'">{{row[field.key]}}</span>
+            <ng-container *ngIf="field.key === '_actions'">
+              <button class="btn btn-{{action.color}} m-1" type="button" *ngFor="let action of field.actions"
+                (click)="$event.stopPropagation(); selectedConfirmation = {data : row, action: action }; confirmationModal.show();"
+                [tooltip]="action.tooltip"><i class="fa fa-{{action.icon}}" data-toggle="modal"></i></button>
+
+            </ng-container>
           </td>
         </tr>
       </tbody>
@@ -64,3 +61,28 @@
     </div>
   </div>
 </div>
+
+<div *ngIf='!tableData.data?.length' class='text-muted'>No data to show!</div>
+
+<div bsModal #confirmationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-warning" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmation!</h4>
+        <button type="button" class="close" (click)="confirmationModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to <strong>{{selectedConfirmation?.action?.key}}</strong>
+          <em>{{selectedConfirmation?.data?.name}}</em> </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="confirmationModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="doSelectedAction(); confirmationModal.hide()">Yes,
+          Please</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

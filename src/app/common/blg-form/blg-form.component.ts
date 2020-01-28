@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { formsConfig } from '../formsConfig';
-
+import { BlgService } from '../../authenticated/blg-service';
+import { ToastrService } from 'ngx-toastr';
+import * as $ from "jquery";
 
 /*
 This is a common form component can be used by any component which have form
@@ -26,17 +28,42 @@ export class BlgFormComponent implements OnInit {
   formModal: any;
   formData: any = {};
 
-  constructor() { }
+  constructor(private service: BlgService, private toastr: ToastrService) { }
 
   ngOnInit() {
     if (this.formName && formsConfig[this.formName]) {
       this.formModal = formsConfig[this.formName];
     }
+    setTimeout(() => {
+      $('input:enabled:visible:first').focus();
+    });
   }
 
   onFrmSubmit() {
-    this.onSubmit.emit({ success: true, data: this.formData });
+    if (this.formModal.submitAPI) {
+      this.service.postAPI(this.formModal.submitAPI, this.formData).subscribe((data: any) => {
+        console.log(data);
+        if (data.status === 200) {
+          this.toastr.success('Successful!', data.message, { timeOut: 3000 });
+          this.onSubmit.emit({ success: true, data: this.formData });
+          this.resetForm();
+          $('input:enabled:visible:first').focus();
+        }
+        if (data.status === 400) {
+          this.toastr.error('Error!', data.message, { timeOut: 3000 });
+          this.onSubmit.emit({ success: true, data: this.formData });
+          this.resetForm();
+        }
+      });
+    } else {
+      this.onSubmit.emit({ success: true, data: this.formData });
+    }
     console.log('on submit');
+  }
+
+  resetForm() {
+    this.formData = {};
+    $('input:enabled:visible:first').focus();
   }
 
   isInputType(type: string) {

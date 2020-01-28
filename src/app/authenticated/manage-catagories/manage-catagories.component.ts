@@ -13,12 +13,8 @@ export class ManageCatagoriesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: BlgService) {
 
     service.userInfo.subscribe(data => {
-      service.catagoriesGetList().subscribe((data: any) => {
-        if (data.status == 200) {
-          this.categories = data.data;
-        }
-      });
-    })
+
+    });
 
 
   }

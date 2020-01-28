@@ -19,9 +19,12 @@ export class BaseComponent implements OnInit {
   constructor(private activeRouter: ActivatedRoute, private router: Router, private service: BlgService) {
     this.userInfo = this.service.getFromLocal('LOGIN_INFO');
     globalConfig.userInfo = this.userInfo;
-    service.userInfo.next(this.userInfo)
+    service.userInfo.next(this.userInfo);
+    this.breadcrumbs = (this.router.url.split('/'));
+    this.breadcrumbs.shift();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        console.info('event', event);
         this.breadcrumbs = (event.url.split('/'));
         this.breadcrumbs.shift();
       }

@@ -6,7 +6,8 @@
 
 // If you want to add something do it here
 @import "custom";
-
+// regular style toast
+@import '~ngx-toastr/toastr';
 
 app-forgot-password{
   display: -webkit-box;

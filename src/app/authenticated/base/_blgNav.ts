@@ -18,7 +18,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Manage Catagories',
-    url: '/dashboard/manageCatagories',
+    url: '/dashboard/manageCategory',
     icon: 'icon-folder-alt'
   },
   {

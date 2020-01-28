@@ -1,2 +1,8 @@
-<div class="progress-loader" [hidden]="!loading">
+<div class="pace pace-active" [hidden]="!loading">
+  <div class="pace-progress">
+    <div class="pace-progress-inner"></div>
+  </div>
+  <div class="pace-activity"></div>
 </div>
+
+<div class='backdrop' [hidden]="!loading"></div>

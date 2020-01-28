@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { listConfig } from './blgListConfig';
+import { BlgService } from '../../authenticated/blg-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blg-listing-layout',
@@ -12,7 +14,9 @@ export class BlgListingLayoutComponent implements OnInit {
   @Input() defaultData: any;
 
   tableData: any;
-  constructor() {
+  selectedConfirmation: any;
+
+  constructor(private service: BlgService, private toastr: ToastrService) {
 
   }
 
@@ -20,10 +24,19 @@ export class BlgListingLayoutComponent implements OnInit {
     if (this.tableName && listConfig[this.tableName]) {
       this.tableData = listConfig[this.tableName];
     }
-
     if (this.defaultData) {
-      console.info(this.defaultData);
       this.tableData.data = this.defaultData;
+    } else { this.getListData(); }
+  }
+
+  getListData() {
+    if (this.tableData.apis.getAPI) {
+      // check for API
+      this.service.getAPI(this.tableData.apis.getAPI).subscribe((data: any) => {
+        if (data.status === 200) {
+          this.tableData.data = data.data;
+        }
+      });
     }
   }
 
@@ -39,6 +52,20 @@ export class BlgListingLayoutComponent implements OnInit {
       }
     }
     return count;
+  }
+
+  doSelectedAction() {
+    if (this.selectedConfirmation.action.deleteAPI) {
+      this.service.deleteAPI(this.selectedConfirmation.action.deleteAPI.replace('{id}', this.selectedConfirmation.data['_id'])).subscribe((data: any) => {
+        if (data.status === 200) {
+          this.toastr.success('Successful!', data.message, { timeOut: 3000 });
+          this.getListData();
+        }
+        if (data.status === 400) {
+          this.toastr.error('Error!', data.message, { timeOut: 3000 });
+        }
+      });
+    }
   }
 
 }
