@@ -15,7 +15,7 @@ project overview, features, technical and project management approach for the co
 project.
 
 # Live Demo:
-[http://blg.logical-brains.com/](http://blg.logical-brains.com/)
+<Removed>
 
 # Specification:
 ## 1. Login
